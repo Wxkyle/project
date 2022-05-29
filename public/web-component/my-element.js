@@ -41,6 +41,17 @@ export class MyElement extends LitElement {
     ];
   }
 
+  _handleStarClick(index) {
+    if (this.data[index].starSetting === false) {
+      this.data[index].starSetting = true;
+    } else {
+      this.data[index].starSetting = false;
+    }
+
+    this.data = [...this.data];
+    // this.requestUpdate("data", updatedData);
+  }
+
   onOffStar(objectData, index) {
     console.log("index", objectData);
 
@@ -66,18 +77,26 @@ export class MyElement extends LitElement {
     // });
 
     if (objectData.starSetting === false) {
-      this.data[index].starSetting = true;
+      // this.addEventListener("click", (e) => {
+      //   console.log("stuff", e);
+      //   this.data[index].starSetting = true;
+      // });
       return html`<a
         id="${objectData.name}"
+        @click=${() => this._handleStarClick(index)}
         class="mdl-list__item-secondary-action"
         href="#"
       >
         <i class="material-icons">star_border</i>
       </a>`;
     } else if (objectData.starSetting === true) {
-      this.data[index].starSetting = false;
+      // this.addEventListener("click", (e) => {
+      //   console.log("stuff", e);
+      //   this.data[index].starSetting = false;
+      // });
       return html`<a
         id="${objectData.name}"
+        @click=${() => this._handleStarClick(index)}
         class="mdl-list__item-secondary-action"
         href="#"
       >
@@ -166,6 +185,11 @@ export class MyElement extends LitElement {
         <label class="mdl-textfield__label" for="sample3">Name</label>
       </div>
       <button
+        style="        
+      position: absolute !important;
+      right: 20px;
+      bottom: -28px;
+      "
         class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored"
         @click=${this._handleClick}
       >
@@ -175,8 +199,18 @@ export class MyElement extends LitElement {
 
   render() {
     return html`
-      <body>
-        <div class="container">
+      <body style="background-color: #eee;">
+        <div
+          style="   
+        padding: 0 20px 30px;
+        width: 300px;
+        background: white;
+        border: 2px solid #eaeaea;
+        position: fixed;
+        top: 100px;
+        left: 100px;
+        "
+        >
           <ul class="demo-list-two mdl-list">
             ${this.listItem()}
           </ul>
